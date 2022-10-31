@@ -14,12 +14,15 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  hive_flutter: ^1.1.0
   http: ^0.13.5
   intl: ^0.17.0
   provider: ^6.0.4
 
 dev_dependencies:
   flutter_lints: ^2.0.0
+  hive_generator: ^2.0.0
+  build_runner: ^2.3.2
   flutter_test:
     sdk: flutter
 

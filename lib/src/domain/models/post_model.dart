@@ -1,22 +1,22 @@
-import 'dart:convert';
+import 'package:hive_flutter/hive_flutter.dart';
 
-List<PostModel> postModelFromJson(String str) =>
-    List<PostModel>.from(json.decode(str).map((x) => PostModel.fromJson(x)));
+part 'post_model.g.dart';
 
-String postModelToJson(List<PostModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
-class PostModel {
+@HiveType(typeId: 1)
+class PostModel extends HiveObject {
   PostModel({
     required this.userId,
     required this.id,
     required this.title,
     required this.body,
   });
-
+  @HiveField(0)
   int userId;
+  @HiveField(1)
   int id;
+  @HiveField(2)
   String title;
+  @HiveField(3)
   String body;
 
   factory PostModel.fromJson(Map<String, dynamic> json) => PostModel(

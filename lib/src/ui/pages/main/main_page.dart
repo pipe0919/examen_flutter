@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../user_list_page/user_list_page.dart';
 import '../../responsive/Adapt.dart';
 import '../../../data/provider/user_list_provider.dart';
 import '../../../../generated/l10n.dart';
+import 'main_page_controller.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -14,12 +14,13 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   UserListProvider? userListProvider;
+  MainPageController mainPageController = MainPageController();
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       userListProvider = Provider.of<UserListProvider>(context, listen: false);
-      userListProvider!.getUserList();
+      userListProvider!.checkIfUsersAreSaved();
     });
   }
 
@@ -37,7 +38,7 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
       ),
-      body: const UserListPage(),
+      body: mainPageController.esLoading(userListProvider!.userAreSaved),
     );
   }
 }

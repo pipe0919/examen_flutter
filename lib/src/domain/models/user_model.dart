@@ -1,22 +1,22 @@
-import 'dart:convert';
+import 'package:hive_flutter/hive_flutter.dart';
 
-List<UserModel> userModelFromJson(String str) =>
-    List<UserModel>.from(json.decode(str).map((x) => UserModel.fromJson(x)));
+part 'user_model.g.dart';
 
-String userModelToJson(List<UserModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
-class UserModel {
+@HiveType(typeId: 0)
+class UserModel extends HiveObject {
   UserModel({
     required this.id,
     required this.name,
     required this.email,
     required this.phone,
   });
-
+  @HiveField(0)
   int id;
+  @HiveField(1)
   String name;
+  @HiveField(2)
   String email;
+  @HiveField(3)
   String phone;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
