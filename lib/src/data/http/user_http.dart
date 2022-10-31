@@ -6,23 +6,26 @@ import '../enviroment/environment.dart';
 
 import '../../domain/models/user_model.dart';
 
-class UsersService extends UserRepository {
+class UserFromHttp extends UserRepository {
   @override
   Future<List<UserModel>> getUserList() async {
     List<UserModel> userModelList = [];
     String url = Env.findUsers;
+    try {
+      final response = await http.get(
+        Uri.parse(url),
+      );
 
-    final response = await http.get(
-      Uri.parse(url),
-    );
-
-    if (response.statusCode == 200) {
-      var jsonResponse = json.decode(response.body);
-      for (var user in jsonResponse) {
-        userModelList.add(UserModel.fromJson(user));
+      if (response.statusCode == 200) {
+        var jsonResponse = json.decode(response.body);
+        for (var user in jsonResponse) {
+          userModelList.add(UserModel.fromJson(user));
+        }
+        return userModelList;
+      } else {
+        return [];
       }
-      return userModelList;
-    } else {
+    } catch (e) {
       return [];
     }
   }

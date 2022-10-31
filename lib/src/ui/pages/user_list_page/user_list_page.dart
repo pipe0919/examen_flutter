@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../data/http/find_posts_http.dart';
-import '../../../domain/models/post_model.dart';
 import '../../colors/colors.dart';
 import '../../responsive/Adapt.dart';
+import '../../widgets/const_widgets.dart';
 import '../../widgets/info_user_text_widget.dart';
 import '../../../domain/models/user_model.dart';
-import '../../../data/provider/user_list_provider.dart';
-import '../info_user_page/post_detail_page.dart';
+import '../../../data/provider/user_provider.dart';
+import 'post_list_controller.dart';
 
 class UserListPage extends StatefulWidget {
   const UserListPage({Key? key}) : super(key: key);
@@ -17,43 +16,30 @@ class UserListPage extends StatefulWidget {
 }
 
 class _UserListPageState extends State<UserListPage> {
-  UserListProvider? userProvider;
-  final spaceW = Container(
-    width: Adapt.wp(5),
-  );
-  final spaceH = Container(
-    height: Adapt.hp(0.5),
-  );
+  PostListController postListController = PostListController();
+  UserFromProvider? userProvider;
 
   @override
   Widget build(BuildContext context) {
-    userProvider = Provider.of<UserListProvider>(context, listen: true);
+    userProvider = Provider.of<UserFromProvider>(context, listen: true);
 
-    return Center(
-        child: SizedBox(
-      width: Adapt.wp(95),
-      child: ListView.separated(
-        itemCount: userProvider!.userModelList!.length,
-        separatorBuilder: (context, index) => Container(
-          height: Adapt.hp(5),
-        ),
-        itemBuilder: (context, index) => MaterialButton(
-          onPressed: () async {
-            final findPostService = FindPostService();
-            List<PostModel> postList = await findPostService
-                .getPostListByUserId(userProvider!.userModelList![index].id);
-            // ignore: use_build_context_synchronously
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return PostDetailPage(
-                user: userProvider!.userModelList![index],
-                postList: postList,
-              );
-            }));
-          },
-          child: listPostWidget(userProvider!.userModelList![index]),
-        ),
-      ),
-    ));
+    return userProvider!.userModelList!.isEmpty
+        ? noInternetWidget()
+        : Center(
+            child: SizedBox(
+            width: Adapt.wp(95),
+            child: ListView.separated(
+              itemCount: userProvider!.userModelList!.length,
+              separatorBuilder: (context, index) => Container(
+                height: Adapt.hp(5),
+              ),
+              itemBuilder: (context, index) => MaterialButton(
+                onPressed: () => postListController.goToInfoUserAndListPost(
+                    userProvider!.userModelList![index], context),
+                child: listPostWidget(userProvider!.userModelList![index]),
+              ),
+            ),
+          ));
   }
 
   Widget listPostWidget(UserModel user) {
@@ -63,33 +49,41 @@ class _UserListPageState extends State<UserListPage> {
       color: Colors.white,
       child: Column(
         children: [
-          spaceH,
+          ConstsWidget.spaceH,
           InfoUserText(
             text: user.name,
           ),
-          spaceH,
+          ConstsWidget.spaceH,
           Row(
             children: [
               const Icon(Icons.email, color: ColorsApp.appColor),
-              spaceW,
+              ConstsWidget.spaceW,
               InfoUserText(
                 text: user.phone,
               ),
             ],
           ),
-          spaceH,
+          ConstsWidget.spaceH,
           Row(
             children: [
               const Icon(Icons.phone, color: ColorsApp.appColor),
-              spaceW,
+              ConstsWidget.spaceW,
               InfoUserText(
                 text: user.email,
               ),
             ],
           ),
-          spaceH,
+          ConstsWidget.spaceH,
         ],
       ),
+    );
+  }
+
+  Widget noInternetWidget() {
+    return Container(
+      alignment: Alignment.center,
+      color: Colors.white,
+      child: Text('no hay usuarios en el momento, intente mas tarde'),
     );
   }
 }

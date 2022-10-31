@@ -5,8 +5,9 @@ import '../../domain/models/user_model.dart';
 import '../hive/user_hive.dart';
 import '../http/user_http.dart';
 
-class UserListProvider extends ChangeNotifier {
-  UsersService userService = UsersService();
+class UserFromProvider extends ChangeNotifier {
+  UserFromHttp userFromHttp = UserFromHttp();
+  UserFromHive userFromHive = UserFromHive();
 
   late List<UserModel>? _userModelList = [];
 
@@ -27,15 +28,17 @@ class UserListProvider extends ChangeNotifier {
   }
 
   Future<void> getUserList() async {
-    List<UserModel> postModelListFromService = await userService.getUserList();
-    userModelList = postModelListFromService;
+    List<UserModel> userModelListFormService = await userFromHttp.getUserList();
+    for (var user in userModelListFormService) {
+      userFromHive.saveUser(user);
+    }
+    userModelList = userModelListFormService;
     userAreSaved = true;
     notifyListeners();
   }
 
   void checkIfUsersAreSaved() async {
-    UsersFromHive usersFromHive = UsersFromHive();
-    List<UserModel> usersFromDB = await usersFromHive.getUserList();
+    List<UserModel> usersFromDB = await userFromHive.getUserList();
 
     if (usersFromDB.isNotEmpty) {
       userModelList = usersFromDB;

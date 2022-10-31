@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../responsive/Adapt.dart';
-import '../../../data/provider/user_list_provider.dart';
+import '../../../data/provider/user_provider.dart';
 import '../../../../generated/l10n.dart';
 import 'main_page_controller.dart';
 
@@ -13,20 +13,20 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  UserListProvider? userListProvider;
+  UserFromProvider? userListProvider;
   MainPageController mainPageController = MainPageController();
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      userListProvider = Provider.of<UserListProvider>(context, listen: false);
+      userListProvider = Provider.of<UserFromProvider>(context, listen: false);
       userListProvider!.checkIfUsersAreSaved();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    userListProvider = Provider.of<UserListProvider>(context, listen: true);
+    userListProvider = Provider.of<UserFromProvider>(context, listen: true);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 218, 218, 218),
       appBar: AppBar(

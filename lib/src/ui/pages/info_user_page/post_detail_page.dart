@@ -1,30 +1,46 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-import '../../../domain/models/post_model.dart';
+import '../../../data/provider/post_provider.dart';
 import '../../../domain/models/user_model.dart';
 import '../../../../generated/l10n.dart';
 import '../../responsive/Adapt.dart';
 import '../../widgets/info_user_text_widget.dart';
 import '../../widgets/titlle_text_widget.dart';
+import 'post_detail_controller.dart';
 
-// ignore: must_be_immutable
-class PostDetailPage extends StatelessWidget {
+class PostDetailPage extends StatefulWidget {
   PostDetailPage({
     super.key,
     required this.user,
-    required this.postList,
   });
-  final spaceHeight = SizedBox(
-    height: Adapt.hp(1),
-  );
-  List<PostModel> postList;
+
   UserModel user;
 
   @override
+  State<PostDetailPage> createState() => _PostDetailPageState();
+}
+
+class _PostDetailPageState extends State<PostDetailPage> {
+  PostDetailController postDetailController = PostDetailController();
+  final spaceHeight = SizedBox(
+    height: Adapt.hp(1),
+  );
+
+  @override
   Widget build(BuildContext context) {
+    PostFromProvider findPostProvider =
+        Provider.of<PostFromProvider>(context, listen: true);
+
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context, false);
+            findPostProvider.postAreSaved = false;
+          },
+        ),
         centerTitle: true,
         title: Text(
           S.current.post,
@@ -42,9 +58,9 @@ class PostDetailPage extends StatelessWidget {
               spaceHeight,
               TittleText(text: S.current.user),
               spaceHeight,
-              InfoUserText(text: '${S.current.name}: ${user.name}'),
-              InfoUserText(text: '${S.current.email}: ${user.email}'),
-              InfoUserText(text: '${S.current.phone}: ${user.phone}'),
+              InfoUserText(text: '${S.current.name}: ${widget.user.name}'),
+              InfoUserText(text: '${S.current.email}: ${widget.user.email}'),
+              InfoUserText(text: '${S.current.phone}: ${widget.user.phone}'),
               spaceHeight,
               spaceHeight,
               Container(
@@ -54,43 +70,12 @@ class PostDetailPage extends StatelessWidget {
                 child: TittleText(text: S.current.posts),
               ),
               spaceHeight,
-              listViewOfPosts(),
+              postDetailController.esLoading(findPostProvider.postAreSaved,
+                  widget.user, findPostProvider.currentPostList),
             ],
           )),
         ),
       ),
-    );
-  }
-
-  Widget listViewOfPosts() {
-    return ListView.separated(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemBuilder: (context, index) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            alignment: Alignment.centerLeft,
-            height: Adapt.hp(25),
-            width: Adapt.wp(80),
-            child: Padding(
-              padding: EdgeInsets.only(left: Adapt.px(10), right: Adapt.px(10)),
-              child: Text(
-                postList[index].title,
-                textAlign: TextAlign.start,
-                style: TextStyle(
-                  fontSize: Adapt.px(24),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-      separatorBuilder: (context, index) => Container(
-        height: Adapt.hp(0.15),
-        color: Colors.grey,
-      ),
-      itemCount: postList.length,
     );
   }
 }

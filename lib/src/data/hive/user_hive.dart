@@ -4,7 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../common/const.dart';
 
-class UsersFromHive extends UserRepository {
+class UserFromHive extends UserRepository {
   @override
   Future<List<UserModel>> getUserList() async {
     final box = await Hive.openBox<UserModel>(Consts.userBoxName);
