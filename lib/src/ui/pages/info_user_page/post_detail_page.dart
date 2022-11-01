@@ -9,6 +9,7 @@ import '../../widgets/info_user_text_widget.dart';
 import '../../widgets/titlle_text_widget.dart';
 import 'post_detail_controller.dart';
 
+// ignore: must_be_immutable
 class PostDetailPage extends StatefulWidget {
   PostDetailPage({
     super.key,

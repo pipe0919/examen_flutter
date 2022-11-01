@@ -22,25 +22,14 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "alert": MessageLookupByLibrary.simpleMessage("Alerta!"),
-        "all": MessageLookupByLibrary.simpleMessage("Todos"),
-        "cancel": MessageLookupByLibrary.simpleMessage("CANCELAR"),
         "comments": MessageLookupByLibrary.simpleMessage("Comentarios"),
-        "confirm": MessageLookupByLibrary.simpleMessage(
-            "¿Usted está seguro de quiere eliminar todos las publicaciones?"),
-        "description": MessageLookupByLibrary.simpleMessage("Descripción"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
-        "favorites": MessageLookupByLibrary.simpleMessage("Favoritos"),
-        "loadApi": MessageLookupByLibrary.simpleMessage(
-            "Presiona el boton para cargar los datos"),
+        "listEmpty":
+            MessageLookupByLibrary.simpleMessage("La lista está vacía"),
         "name": MessageLookupByLibrary.simpleMessage("Nombre"),
-        "noFavoritePosts": MessageLookupByLibrary.simpleMessage(
-            "No hay publicaciones favoritas"),
         "phone": MessageLookupByLibrary.simpleMessage("Teléfono"),
         "post": MessageLookupByLibrary.simpleMessage("Publicación"),
         "posts": MessageLookupByLibrary.simpleMessage("Publicaciones"),
-        "title": MessageLookupByLibrary.simpleMessage("Título"),
-        "user": MessageLookupByLibrary.simpleMessage("Usuario"),
-        "website": MessageLookupByLibrary.simpleMessage("Sitio web")
+        "user": MessageLookupByLibrary.simpleMessage("Usuario")
       };
 }

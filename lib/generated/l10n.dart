@@ -50,26 +50,6 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
-  /// `All`
-  String get all {
-    return Intl.message(
-      'All',
-      name: 'all',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Favorites`
-  String get favorites {
-    return Intl.message(
-      'Favorites',
-      name: 'favorites',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Post`
   String get post {
     return Intl.message(
@@ -95,36 +75,6 @@ class S {
     return Intl.message(
       'Comments',
       name: 'comments',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `No favorite posts`
-  String get noFavoritePosts {
-    return Intl.message(
-      'No favorite posts',
-      name: 'noFavoritePosts',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Title`
-  String get title {
-    return Intl.message(
-      'Title',
-      name: 'title',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Description`
-  String get description {
-    return Intl.message(
-      'Description',
-      name: 'description',
       desc: '',
       args: [],
     );
@@ -170,61 +120,11 @@ class S {
     );
   }
 
-  /// `Website`
-  String get website {
+  /// `List is empty`
+  String get listEmpty {
     return Intl.message(
-      'Website',
-      name: 'website',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Press the button to load the data`
-  String get loadApi {
-    return Intl.message(
-      'Press the button to load the data',
-      name: 'loadApi',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Loading...`
-  String get loading {
-    return Intl.message(
-      'Loading...',
-      name: 'loading',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Alert!`
-  String get alert {
-    return Intl.message(
-      'Alert!',
-      name: 'alert',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Are you sure you want to delete all posts?`
-  String get confirm {
-    return Intl.message(
-      'Are you sure you want to delete all posts?',
-      name: 'confirm',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `CANCEL`
-  String get cancel {
-    return Intl.message(
-      'CANCEL',
-      name: 'cancel',
+      'List is empty',
+      name: 'listEmpty',
       desc: '',
       args: [],
     );

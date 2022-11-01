@@ -28,6 +28,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     userListProvider = Provider.of<UserFromProvider>(context, listen: true);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromARGB(255, 218, 218, 218),
       appBar: AppBar(
         title: Text(

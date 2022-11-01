@@ -18,28 +18,56 @@ class UserListPage extends StatefulWidget {
 class _UserListPageState extends State<UserListPage> {
   PostListController postListController = PostListController();
   UserFromProvider? userProvider;
-
+  TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     userProvider = Provider.of<UserFromProvider>(context, listen: true);
 
-    return userProvider!.userModelList!.isEmpty
-        ? noInternetWidget()
-        : Center(
-            child: SizedBox(
-            width: Adapt.wp(95),
-            child: ListView.separated(
-              itemCount: userProvider!.userModelList!.length,
-              separatorBuilder: (context, index) => Container(
-                height: Adapt.hp(5),
-              ),
-              itemBuilder: (context, index) => MaterialButton(
-                onPressed: () => postListController.goToInfoUserAndListPost(
-                    userProvider!.userModelList![index], context),
-                child: listPostWidget(userProvider!.userModelList![index]),
-              ),
+    return Center(
+        child: SizedBox(
+      width: Adapt.wp(95),
+      child: Column(
+        children: [
+          Container(
+            height: Adapt.hp(1),
+          ),
+          TextField(
+            controller: searchController,
+            decoration: const InputDecoration(
+              hintText: 'Search',
+              prefixIcon: Icon(Icons.search),
             ),
-          ));
+            onChanged: (value) {
+              setState(() {});
+            },
+          ),
+          Container(
+            height: Adapt.hp(3),
+          ),
+          userProvider!.listaFiltrada(searchController.text)!.isEmpty
+              ? ConstsWidget.emptyListWidget()
+              : SizedBox(
+                  height: Adapt.hp(78),
+                  child: ListView.separated(
+                    shrinkWrap: true,
+                    itemCount: userProvider!
+                        .listaFiltrada(searchController.text)!
+                        .length,
+                    separatorBuilder: (context, index) => Container(
+                      height: Adapt.hp(5),
+                    ),
+                    itemBuilder: (context, index) => MaterialButton(
+                      onPressed: () =>
+                          postListController.goToInfoUserAndListPost(
+                              userProvider!.userModelList![index], context),
+                      child: listPostWidget(userProvider!
+                          .listaFiltrada(searchController.text)![index]),
+                    ),
+                  ),
+                ),
+        ],
+      ),
+    ));
   }
 
   Widget listPostWidget(UserModel user) {
@@ -76,14 +104,6 @@ class _UserListPageState extends State<UserListPage> {
           ConstsWidget.spaceH,
         ],
       ),
-    );
-  }
-
-  Widget noInternetWidget() {
-    return Container(
-      alignment: Alignment.center,
-      color: Colors.white,
-      child: Text('no hay usuarios en el momento, intente mas tarde'),
     );
   }
 }

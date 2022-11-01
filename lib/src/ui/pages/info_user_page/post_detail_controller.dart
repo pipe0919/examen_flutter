@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../domain/models/post_model.dart';
 import '../../../domain/models/user_model.dart';
 import '../../responsive/Adapt.dart';
+import '../../widgets/const_widgets.dart';
 
 class PostDetailController {
   Widget esLoading(bool ready, UserModel user, List<PostModel> postList) {
@@ -17,7 +18,7 @@ class PostDetailController {
 
   Widget listViewOfPosts(List<PostModel> postList) {
     return postList.isEmpty
-        ? noInternetWidget()
+        ? ConstsWidget.emptyListWidget()
         : ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -48,13 +49,5 @@ class PostDetailController {
             ),
             itemCount: postList.length,
           );
-  }
-
-  Widget noInternetWidget() {
-    return Container(
-      alignment: Alignment.center,
-      color: Colors.white,
-      child: Text('No hay post en el momento, por favor intentalo mas tarde'),
-    );
   }
 }

@@ -9,6 +9,7 @@ import '../info_user_page/post_detail_page.dart';
 
 class PostListController {
   void goToInfoUserAndListPost(UserModel user, context) async {
+    FocusScope.of(context).unfocus();
     PostFromProvider findPostProvider =
         Provider.of<PostFromProvider>(context, listen: false);
 

@@ -1,20 +1,10 @@
 {
-"all":"All",
-"favorites":"Favorites",
-"post":"Post",
-"posts":"Posts",
-"comments":"Comments",
-"noFavoritePosts":"No favorite posts",
-"title":"Title",
-"description":"Description",
-"user":"User",
-"name":"Name",
-"email":"Email",
-"phone":"Phone",
-"website":"Website",
-"loadApi":"Press the button to load the data",
-"loading":"Loading...",
-"alert":"Alert!",
-"confirm":"Are you sure you want to delete all posts?",
-"cancel":"CANCEL"
+    "post": "Post",
+    "posts": "Posts",
+    "comments": "Comments",
+    "user": "User",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "listEmpty": "List is empty"
 }

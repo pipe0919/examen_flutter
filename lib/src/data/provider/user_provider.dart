@@ -47,4 +47,12 @@ class UserFromProvider extends ChangeNotifier {
       getUserList();
     }
   }
+
+  List<UserModel>? listaFiltrada(String query) {
+    List<UserModel>? listaFiltrada = userModelList!.where((user) {
+      return user.name.toLowerCase().contains(query.toLowerCase());
+    }).toList();
+
+    return listaFiltrada;
+  }
 }

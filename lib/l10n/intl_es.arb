@@ -1,20 +1,10 @@
 {
-"all":"Todos",
-"favorites":"Favoritos",
-"post":"Publicación",
-"posts":"Publicaciones",
-"comments":"Comentarios",
-"noFavoritePosts":"No hay publicaciones favoritas",
-"title":"Título",
-"description":"Descripción",
-"user":"Usuario",
-"name":"Nombre",
-"email":"Email",
-"phone":"Teléfono",
-"website":"Sitio web",
-"loadApi":"Presiona el boton para cargar los datos",
-"loadings":"Cargando...",
-"alert":"Alerta!",
-"confirm":"¿Usted está seguro de quiere eliminar todos las publicaciones?",
-"cancel":"CANCELAR"
+    "post": "Publicación",
+    "posts": "Publicaciones",
+    "comments": "Comentarios",
+    "user": "Usuario",
+    "name": "Nombre",
+    "email": "Email",
+    "phone": "Teléfono",
+    "listEmpty": "La lista está vacía"
 }
