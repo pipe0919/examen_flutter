@@ -27,7 +27,6 @@ dev_dependencies:
     sdk: flutter
   flutter_driver:
     sdk: flutter
-  mockito:
 
 flutter:
   uses-material-design: true
